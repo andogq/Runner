@@ -1,0 +1,22 @@
+#searchContainer {
+    position: fixed;
+
+    max-width: 40%;
+    max-height: 50%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#searchContainer > * {
+    padding: 0.75rem;
+    margin: 1rem;
+
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 1rem black;
+}
+
+#searchContainer > *:first-child {
+    display: flex;
+    flex-direction: column;
+}

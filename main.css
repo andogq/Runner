@@ -1,17 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("./css/elements.css");
+@import url("./css/search.css");
+@import url("./css/map.css");
+@import url("./css/results.css");
+
 * {
     padding: 0;
     margin: 0;
+
+    font-family: 'Montserrat', sans-serif;
 }
 
 html, body {
-    height: 100%;
-    width: 100%;
-}
-
-#map {
-    position: fixed;
-    top: 0;
-    bottom: 0;
     height: 100%;
     width: 100%;
 }
