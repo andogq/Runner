@@ -14,6 +14,10 @@ function getKey() {
 function init() {
     getKey().then((key) => {
         search = new Search(key);
+        search.selectionCallback = (selection) => {
+            map.start = selection;
+            console.log("yeet");
+        }
 
         map = new Map(key, {
             style: "mapbox://styles/mapbox/streets-v11",

@@ -41,6 +41,27 @@ class Search {
                 let p = document.createElement("p");
                 p.innerText = result.place_name;
                 el.appendChild(p);
+
+                let [lon, lat] = result.geometry.coordinates;
+                let coords = document.createElement("input");
+                coords.type = "hidden";
+                coords.value = JSON.stringify({lon, lat});
+                el.appendChild(coords);
+
+                el.addEventListener("click", (e) => {
+                    let el = e.target;
+
+                    while (!el.classList.contains("result")) el = el.parentElement;
+
+                    if (typeof this.selectionCallback == "function") {
+                        let coordinates = el.children[1].value;
+                        
+                        this.selectionCallback(JSON.parse(coordinates));
+
+                        this.searchText.value = el.children[0].innerText;
+                        this.hide();
+                    }
+                });
     
                 this.results.appendChild(el);
             });
