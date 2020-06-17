@@ -6,9 +6,18 @@ function initMapbox() {
             mapboxgl.accessToken = key;
             map = new mapboxgl.Map({
                 container: "map",
-                style: "mapbox://styles/mapbox/streets-v11"
+                style: "mapbox://styles/mapbox/streets-v11",
+                center: {
+                    lat: -38.1499,
+                    lon: 144.3617
+                },
+                zoom: 15,
+                minZoom: 12
             });
         });
+    }).catch((err) => {
+        console.error("Something went wrong with retreiving the Mapbox Key:");
+        console.error(err);
     });
 }
 function init() {
