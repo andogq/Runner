@@ -1,6 +1,7 @@
 // Imports
 import {Map} from "./js/map.js";
 import {Search} from "./js/search.js";
+import {MapboxAPI} from "./js/mapboxApi.js";
 
 // Globals
 let map, search;
@@ -13,12 +14,8 @@ function getKey() {
 
 function init() {
     getKey().then((key) => {
-        search = new Search(key);
-        search.selectionCallback = (selection) => {
-            map.start = selection;
-            console.log("yeet");
-        }
-
+        window.api = new MapboxAPI(key);
+        
         map = new Map(key, {
             style: "mapbox://styles/mapbox/streets-v11",
             center: {
@@ -28,9 +25,14 @@ function init() {
             zoom: 15,
             minZoom: 12
         });
+        map.load().then(() => {
+            console.log("Map loaded");
+
+            search = new Search(key);
+            search.selectionCallback = map.generate.bind(map);
+        });
     }).catch((err) => {
-        console.error("Something went wrong whilst initiating");
-        console.error(err);
+        console.error("Something went wrong whilst initiating", err);
     });
 }
 

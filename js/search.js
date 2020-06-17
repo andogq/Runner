@@ -2,8 +2,6 @@ const containerId = "searchContainer";
 const resultsId = "results";
 const searchTextId = "searchText";
 
-const APIBase = "https://api.mapbox.com";
-
 class Search {
     constructor(key) {
         this.key = key;
@@ -27,11 +25,7 @@ class Search {
     }
 
     search(term) {
-        let endpoint = "mapbox.places";
-
-        return fetch(`${APIBase}/geocoding/v5/${endpoint}/${term}.json?access_token=${this.key}`).then((res) => {
-            return res.text().then((text) => JSON.parse(text).features);
-        }).then((results) => {
+        return window.api.search(term).then((results) => {
             this.clear();
 
             results.forEach((result) => {
