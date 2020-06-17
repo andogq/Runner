@@ -1,14 +1,15 @@
-#searchContainer {
+/* Styling for the sidebar */
+#sidebar {
     position: fixed;
 
     width: 40%;
-    max-height: 50%;
+    max-height: 100%;
 
     display: flex;
     flex-direction: column;
 }
 
-#searchContainer > * {
+#sidebar > * {
     padding: 0.75rem;
     margin: 1rem;
 
@@ -16,19 +17,22 @@
     box-shadow: 0 0 1rem black;
 }
 
-#searchContainer > *:first-child {
+#sidebar > .hidden {
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+}
+
+/* Search section */
+#searchContainer {
     display: flex;
     flex-direction: column;
 }
 
+/* Results section */
 #results {
     overflow-y: scroll;
     transition: opacity 0.25s ease-in-out;
-}
-
-#results.hidden {
-    pointer-events: none;
-    opacity: 0;
 }
 
 #results > .result {
@@ -39,4 +43,10 @@
 }
 #results > .result:last-child {
     border: none;
+}
+
+/* Distance section */
+#distanceContainer {
+    display: flex;
+    flex-direction: column;
 }

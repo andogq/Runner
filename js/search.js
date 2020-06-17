@@ -1,4 +1,5 @@
-const containerId = "searchContainer";
+import {Element} from "./element.js";
+
 const resultsId = "results";
 const searchTextId = "searchText";
 
@@ -6,8 +7,7 @@ class Search {
     constructor(key) {
         this.key = key;
 
-        this.container = document.getElementById(containerId);
-        this.results = document.getElementById(resultsId);
+        this.results = new Element(resultsId);
         this.searchText = document.getElementById(searchTextId);
 
         this.hidden = true;
@@ -56,35 +56,13 @@ class Search {
                     }
                 });
     
-                this.results.appendChild(el);
+                this.results.el.appendChild(el);
             });
         });
     }
 
-    hide() {
-        if (this.hidden) return Promise.resolve();
-        else return new Promise((resolve) => {
-            this.results.style.opacity = 0;
-            this.results.addEventListener("transitionend", resolve, true);
-        }).then(() => {
-            this.results.classList.add("hidden");
-            this.hidden = true;
-        });
-    }
-
-    show() {
-        if (!this.hidden) return Promise.resolve();
-        else return new Promise((resolve) => {
-            this.results.classList.remove("hidden");
-            this.results.style.opacity = 1;
-            this.results.addEventListener("transitionend", resolve, true);
-        }).then(() => {
-            this.hidden = false;
-        });
-    }
-
     clear() {
-        this.results.innerHTML = "";
+        this.results.el.innerHTML = "";
     }
 }
 

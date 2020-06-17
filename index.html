@@ -13,12 +13,16 @@
 <body>
     <div id="map"></div>
 
-    <div id="searchContainer">
-        <div>
-            <label for="search">Search for a location:</label>
+    <div id="sidebar">
+        <div id="searchContainer">
+            <label for="searchText">Start location:</label>
             <input type="text" autocomplete="off" id="searchText"/>
         </div>
         <div id="results" class="hidden"></div>
+        <div id="distanceContainer" class="hidden">
+            <label for="distance">Distance for run (km):</label>
+            <input type="number" autocomplete="off" id="distance" value="5"/>
+        </div>
     </div>
     
     <script src="main.js" type="module"></script>
