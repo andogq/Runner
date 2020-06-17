@@ -10,8 +10,7 @@ class Search {
         this.results = document.getElementById(resultsId);
         this.searchText = document.getElementById(searchTextId);
 
-        this.hidden = false;
-        this.hide();
+        this.hidden = true;
 
         this.searchText.addEventListener("keyup", () => {
             let query = this.searchText.value;
