@@ -1,7 +1,6 @@
 // Imports
 import {Map} from "./js/map.js";
 import {MapboxAPI} from "./js/mapboxApi.js";
-import {init as sidebarInit} from "./js/sidebar.js";
 
 // Globals
 let map, search;
@@ -27,8 +26,6 @@ function init() {
         });
         map.load().then(() => {
             console.log("Map loaded");
-
-            sidebarInit();
         });
     }).catch((err) => {
         console.error("Something went wrong whilst initiating", err);
