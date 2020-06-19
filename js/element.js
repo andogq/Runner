@@ -8,10 +8,10 @@ class Element {
     hide() {
         if (this.hidden) return Promise.resolve();
         else return new Promise((resolve) => {
-            this.results.style.opacity = 0;
-            this.results.addEventListener("transitionend", resolve, true);
+            this.el.style.opacity = 0;
+            this.addEventListener("transitionend", resolve, true);
         }).then(() => {
-            this.results.classList.add("hidden");
+            this.el.classList.add("hidden");
             this.hidden = true;
         });
     }
@@ -19,12 +19,38 @@ class Element {
     show() {
         if (!this.hidden) return Promise.resolve();
         else return new Promise((resolve) => {
-            this.results.classList.remove("hidden");
-            this.results.style.opacity = 1;
-            this.results.addEventListener("transitionend", resolve, true);
+            this.el.classList.remove("hidden");
+            this.el.style.opacity = 1;
+            this.addEventListener("transitionend", resolve, true);
         }).then(() => {
             this.hidden = false;
         });
+    }
+
+    appendChild(child) {
+        this.el.appendChild(child);
+    }
+
+    clear() {
+        this.innerHTML = "";
+    }
+
+    addEventListener(event, callback, options) {
+        this.el.addEventListener(event, callback, options);
+    }
+
+    get value() {
+        return this.el.value;
+    }
+    set value(value) {
+        this.el.value = value;
+    }
+
+    get innerHTML() {
+        return this.el.innerHTML;
+    }
+    set innerHTML(innerHTML) {
+        this.el.innerHTML = innerHTML;
     }
 }
 
