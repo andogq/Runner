@@ -29,7 +29,7 @@
     transition: opacity 0.25s ease-in-out;
 }
 
-#container > .hidden {
+#container > *:not(.activeContainer) {
     pointer-events: none;
     opacity: 0;
     position: fixed;

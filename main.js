@@ -1,9 +1,10 @@
 // Imports
 import {Map} from "./js/map.js";
 import {MapboxAPI} from "./js/mapboxApi.js";
+import {state} from "./js/state.js";
 
 // Globals
-let map, search;
+let map;
 
 function getKey() {
     return fetch("/mapbox.key").then((res) => {
@@ -12,6 +13,8 @@ function getKey() {
 }
 
 function init() {
+    window.state = state;
+
     getKey().then((key) => {
         window.api = new MapboxAPI(key);
         
