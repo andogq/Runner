@@ -16,7 +16,21 @@
 <body>
     <div id="map"></div>
 
+    <div id="topBar">
+        <h3>Runner</h3>
+        <div>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+
+    </div>
+
     <div id="container">
+        <div id="container_authMenu" class="activeContainer">
+            <input type="button" value="Login" id="button_loginMenu"/>
+            <input type="button" value="Register" id="button_registerMenu"/>
+        </div>
+
         <div id="container_login">
             <div>
                 <label for="input_login_email">Email:</label>
@@ -26,7 +40,7 @@
                 <label for="input_login_username">Password:</label>
                 <input type="password" id="input_login_password"/>
             </div>
-            <a href="#">Reset Password</a>
+            <a href="/resetPassword">Reset Password</a>
             <input type="button" value="Login" id="button_login"/>
         </div>
 

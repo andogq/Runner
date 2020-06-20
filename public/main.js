@@ -12,8 +12,23 @@ function getKey() {
     });
 }
 
+function initElements() {
+    // Make a elements change the state
+    [...document.getElementsByTagName("a")].forEach((el) => {
+        el.addEventListener("click", (e) => {
+            e.preventDefault();
+            let href = new URL(el.href);
+            window.state.set(href.pathname.replace(/^\//, ""));
+        });
+    });
+}
+
 function init() {
     window.state = state;
+    // Refresh the page state
+    window.state.set(window.state.get());
+
+    initElements();
 
     getKey().then((key) => {
         window.api = new MapboxAPI(key);
