@@ -1,0 +1,5 @@
+#container_login > div {
+    display: grid;
+    grid: 1fr / auto 1fr;
+    align-items: center;
+}

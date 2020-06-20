@@ -2,6 +2,7 @@
 @import url("./css/elements.css");
 @import url("./css/container.css");
 @import url("./css/map.css");
+@import url("./css/login.css");
 
 * {
     padding: 0;
