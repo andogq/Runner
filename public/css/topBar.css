@@ -1,0 +1,29 @@
+#topBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#topBar > * {
+    margin: 1rem;
+}
+
+#topBar > div {
+    padding: 0.5rem;
+    border-bottom: 0.1rem solid lightblue; 
+}
+
+#topBar > div > * {
+    padding: 0.5rem;
+    border-left: 0.1rem solid lightblue;
+}
+#topBar > div > *:first-child {
+    border-left: none;
+}

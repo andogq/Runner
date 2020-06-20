@@ -24,3 +24,15 @@ input[type="button"] {
 input.error {
     border-color: red;
 }
+
+a {
+    color: black;
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 5rem;
+}
+h2 {
+    font-size: 4rem;
+}

@@ -3,6 +3,7 @@
 @import url("./css/container.css");
 @import url("./css/map.css");
 @import url("./css/authentication.css");
+@import url("./css/topBar.css");
 
 * {
     padding: 0;
