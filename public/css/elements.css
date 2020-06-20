@@ -2,12 +2,12 @@ input {
     padding: 0.5rem;
     margin: 0.5rem;
 
-    border: 0.1rem solid lightblue;
-    background: rgba(0, 0, 0, 0);
+    border: var(--border);
+    background: var(--clear);
 
     font-size: 1.5rem;
 
-    transition: border-color 0.25s ease-in-out, background 0.25s ease-in-out;
+    transition: border-color var(--transition), background var(--transition);
 }
 input:focus {
     outline: none;

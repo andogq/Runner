@@ -12,6 +12,15 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+:root {
+    --color: lightblue;
+    --border: 0.1rem solid lightblue;
+    --faded: rgba(255, 255, 255, 0.75);
+    --clear: rgba(0, 0, 0, 0);
+    --transition: 0.25s ease-in-out;
+    --shadow: 0 0 1rem black;
+}
+
 html, body {
     height: 100%;
     width: 100%;

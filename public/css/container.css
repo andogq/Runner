@@ -20,13 +20,13 @@
     padding: 1rem;
     margin: 1rem;
 
-    background: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 0 1rem black;
+    background: var(--faded);
+    box-shadow: var(--shadow);
 
     display: flex;
     flex-direction: column;
 
-    transition: opacity 0.25s ease-in-out;
+    transition: opacity var(--transition);
 }
 
 #container > *:not(.activeContainer) {

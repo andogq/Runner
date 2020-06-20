@@ -17,12 +17,12 @@
 
 #topBar > div {
     padding: 0.5rem;
-    border-bottom: 0.1rem solid lightblue; 
+    border-bottom: var(--border); 
 }
 
 #topBar > div > * {
     padding: 0.5rem;
-    border-left: 0.1rem solid lightblue;
+    border-left: var(--border);
 }
 #topBar > div > *:first-child {
     border-left: none;
