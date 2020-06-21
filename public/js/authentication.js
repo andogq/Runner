@@ -37,7 +37,43 @@ let authentication = {
         });
     },
     login() {
+        this.clearErrors();
 
+        let emailEl = document.getElementById("input_login_email");
+        let passwordEl = document.getElementById("input_login_password");
+
+        let email = emailEl.value;
+        let password = passwordEl.value;
+
+        return firebase.auth().signInWithEmailAndPassword(email, password).then((credential) => {
+            console.log(credential);
+        }).catch((e) => {
+            let emailError = emailEl.parentElement.children[2];
+            let passwordError = passwordEl.parentElement.children[2];
+
+            switch (e.code) {
+                case "auth/invalid-email": {
+                    emailError.innerHTML = e.message;
+                    emailEl.classList.add("error");
+                    break;
+                }
+                case "auth/user-disabled": {
+                    emailError.innerHTML = e.message;
+                    emailEl.classList.add("error");
+                    break;
+                }
+                case "auth/user-not-found": {
+                    emailError.innerHTML = e.message;
+                    emailEl.classList.add("error");
+                    break;
+                }
+                case "auth/wrong-password": {
+                    passwordError.innerHTML = e.message;
+                    passwordEl.classList.add("error");
+                    break;
+                }
+            }
+        });
     },
     clearErrors() {
         [...document.getElementById("container").getElementsByClassName("authentication")].forEach((el) => {
