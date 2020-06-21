@@ -26,11 +26,11 @@
     display: flex;
     flex-direction: column;
 
-    transition: opacity var(--transition);
+    transition: transform var(--transition), opacity var(--transition);
 }
 
-#container > *:not(.activeContainer) {
-    pointer-events: none;
+#container > *:not(.active) {
+    position: absolute;
+    transform: translateX(-100%);
     opacity: 0;
-    position: fixed;
 }

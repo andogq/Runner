@@ -6,14 +6,14 @@ let state = {
         if (!noPush) window.history.pushState(undefined, "", "/" + newState);
 
         // Remove old active containers
-        let active = [...document.getElementsByClassName("activeContainer")];
+        let active = [...document.getElementById("container").getElementsByClassName("active")];
         if (active) active.forEach((container) => {
-            container.classList.remove("activeContainer");
+            container.classList.remove("active");
         });
     
         // Add the new container
         let newActive = document.getElementById(`container_${newState}`);
-        if (newActive) newActive.classList.add("activeContainer");
+        if (newActive) newActive.classList.add("active");
     }
 }
 
