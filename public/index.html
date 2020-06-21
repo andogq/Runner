@@ -11,6 +11,7 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet"/>
 
     <script src="/__/firebase/7.15.3/firebase-app.js"></script>
+    <script src="/__/firebase/7.15.3/firebase-auth.js"></script>
     <script src="/__/firebase/init.js"></script>
 </head>
 <body>
@@ -26,60 +27,69 @@
     </div>
 
     <div id="container">
-        <div id="container_authMenu">
+        <div id="container_authMenu" class="authentication">
             <input type="button" value="Login" id="button_loginMenu"/>
             <input type="button" value="Register" id="button_registerMenu"/>
         </div>
 
-        <div id="container_login">
+        <div id="container_login" class="authentication">
             <div>
                 <label for="input_login_email">Email:</label>
                 <input type="text" id="input_login_email"/>
+                <label for="input_login_email" class="errorLabel"></label>
             </div>
             <div>
                 <label for="input_login_username">Password:</label>
                 <input type="password" id="input_login_password"/>
+                <label for="input_login_password" class="errorLabel"></label>
             </div>
             <a href="/resetPassword">Reset Password</a>
             <input type="button" value="Login" id="button_login"/>
         </div>
 
-        <div id="container_2fa">
+        <div id="container_2fa" class="authentication">
             <div>
                 <label for="input_2fa_code">Code:</label>
                 <input type="number" id="input_2fa_code"/>
+                <label for="input_2fa_code" class="errorLabel"></label>
             </div>
             <input type="button" value="Verify" id="button_verify"/>
         </div>
 
-        <div id="container_register">
+        <div id="container_register" class="authentication">
             <div>
                 <label for="input_register_firstname">First Name:</label>
                 <input type="text" id="input_register_firstname"/>
+                <label for="input_register_firstname" class="errorLabel"></label>
             </div>
             <div>
                 <label for="input_register_lastname">Last Name:</label>
                 <input type="text" id="input_register_lastname"/>
+                <label for="input_register_lastname" class="errorLabel"></label>
             </div>
             <div>
                 <label for="input_register_email">Email:</label>
                 <input type="email" id="input_register_email"/>
+                <label for="input_register_email" class="errorLabel"></label>
             </div>
             <div>
                 <label for="input_register_phone">Phone:</label>
                 <input type="tel" id="input_register_phone"/>
+                <label for="input_register_phone" class="errorLabel"></label>
             </div>
             <div>
                 <label for="input_register_password">Password:</label>
                 <input type="password" id="input_register_password"/>
+                <label for="input_register_password" class="errorLabel"></label>
             </div>
             <input type="button" value="Register" id="button_register"/>
         </div>
 
-        <div id="container_resetPassword">
+        <div id="container_resetPassword" class="authentication">
             <div>
                 <label for="input_resetPassword_email">Email:</label>
                 <input type="email" id="input_resetPassword_email"/>
+                <label for="input_resetPassword_email" class="errorLabel"></label>
             </div>
             <input type="button" value="Reset Password" id="button_resetPassword"/>
         </div>

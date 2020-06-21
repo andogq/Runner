@@ -1,5 +1,9 @@
-#container_login > div, #container_2fa > div, #container_register > div, #container_resetPassword > div {
+#container > .authentication > div {
     display: grid;
-    grid: 1fr / auto 1fr;
+    grid: 1fr auto / auto 1fr;
     align-items: center;
+}
+
+#container > .authentication > div > label.errorLabel {
+    grid-area: 2 / 2 / 3 / 3;
 }

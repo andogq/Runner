@@ -2,6 +2,7 @@
 import {Map} from "./js/map.js";
 import {MapboxAPI} from "./js/mapboxApi.js";
 import {state} from "./js/state.js";
+import {authentication} from "./js/authentication.js";
 
 // Globals
 let map;
@@ -27,6 +28,9 @@ function init() {
     window.state = state;
     // Refresh the page state
     window.state.set(window.state.get());
+
+    window.authentication = authentication;
+    window.authentication.init();
 
     initElements();
 
