@@ -27,3 +27,7 @@
 #topBar > div > *:first-child {
     border-left: none;
 }
+
+#topBar > h2 {
+    color: var(--color);
+}

@@ -14,8 +14,11 @@
 }
 
 :root {
-    --color: lightblue;
-    --border: 0.1rem solid lightblue;
+    --color: #d64933;
+    --colorLight: #dd8577;
+    --colorDark: #a33827;
+
+    --border: 0.1rem solid var(--colorLight);
     --faded: rgba(255, 255, 255, 0.75);
     --clear: rgba(0, 0, 0, 0);
     --transition: 0.25s ease-in-out;
