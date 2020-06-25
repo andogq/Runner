@@ -4,6 +4,7 @@
 @import url("./css/map.css");
 @import url("./css/authentication.css");
 @import url("./css/topBar.css");
+@import url("./css/loader.css");
 
 * {
     padding: 0;

@@ -3,6 +3,7 @@ import {Map} from "./js/map.js";
 import {MapboxAPI} from "./js/mapboxApi.js";
 import {state} from "./js/state.js";
 import {authentication} from "./js/authentication.js";
+import {loader} from "./js/loader.js";
 
 // Globals
 let map;
@@ -32,6 +33,9 @@ function init() {
     window.authentication = authentication;
     window.authentication.init();
 
+    window.loader = loader;
+    let loadingId = window.loader.start();
+
     initElements();
 
     getKey().then((key) => {
@@ -48,6 +52,7 @@ function init() {
         });
         map.load().then(() => {
             console.log("Map loaded");
+            window.loader.stop(loadingId);
         });
     }).catch((err) => {
         console.error("Something went wrong whilst initiating", err);
