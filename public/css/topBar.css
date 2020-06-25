@@ -1,14 +1,12 @@
 #topBar {
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     height: auto;
 
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 #topBar > * {
@@ -17,7 +15,6 @@
 
 #topBar > div {
     padding: 0.5rem;
-    border-bottom: var(--border); 
 }
 
 #topBar > div > * {
