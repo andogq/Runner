@@ -1,9 +1,10 @@
 /* Styling for the container */
 #container {
     position: fixed;
+    top: 4rem;
 
     width: 40%;
-    max-height: 100%;
+    max-height: calc(100% - 4rem);
 
     display: flex;
     flex-direction: column;
