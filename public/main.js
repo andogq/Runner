@@ -1,12 +1,33 @@
 // Imports
 import {Map} from "./js/map.js";
 import {MapboxAPI} from "./js/mapboxApi.js";
-import {state} from "./js/state.js";
+import {State} from "./js/state.js";
 import {authentication} from "./js/authentication.js";
 import {loader} from "./js/loader.js";
 
 // Globals
 let map;
+const stateConfig = {
+    default: {
+        authenticated: 0,
+        trigger: "/"
+    },
+    login: {
+        authenticated: -1,
+        trigger: "/login",
+        container: "login"
+    },
+    register: {
+        authenticated: -1,
+        trigger: "/register",
+        container: "register"
+    },
+    profile: {
+        authenticated: 1,
+        trigger: "/profile",
+        container: "profile"
+    }
+}
 
 function getKey() {
     return fetch("/mapbox.key").then((res) => {
@@ -19,8 +40,8 @@ function initElements() {
     [...document.getElementsByTagName("a")].forEach((el) => {
         el.addEventListener("click", (e) => {
             e.preventDefault();
-            let href = new URL(el.href);
-            window.state.set(href.pathname.replace(/^\//, ""));
+            let url = new URL(el.href);
+            window.state.link(url.pathname);
         });
     });
 
@@ -29,9 +50,7 @@ function initElements() {
 }
 
 function init() {
-    window.state = state;
-    // Refresh the page state
-    window.state.set(window.state.get());
+    window.state = new State(stateConfig);
 
     window.authentication = authentication;
     window.authentication.init();
