@@ -9,7 +9,7 @@ input {
 
     transition: border-color var(--transition), background var(--transition);
 
-    cursor: text;
+    cursor: initial;
 }
 input:focus {
     outline: none;
