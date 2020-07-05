@@ -45,9 +45,7 @@ let authentication = {
         let email = emailEl.value;
         let password = passwordEl.value;
 
-        return firebase.auth().signInWithEmailAndPassword(email, password).then((credential) => {
-            console.log(credential);
-        }).catch((e) => {
+        return firebase.auth().signInWithEmailAndPassword(email, password).then(this.postLogin).catch((e) => {
             let emailError = emailEl.parentElement.children[2];
             let passwordError = passwordEl.parentElement.children[2];
 
@@ -75,6 +73,9 @@ let authentication = {
             }
         });
     },
+    postLogin() {
+        console.log(window.firebase.auth().currentUser);
+    },
     clearErrors() {
         [...document.getElementById("container").getElementsByClassName("authentication")].forEach((el) => {
             [...el.getElementsByClassName("error")].forEach((e) => {
@@ -86,6 +87,11 @@ let authentication = {
     init() {
         document.getElementById("button_login").addEventListener("click", this.login.bind(this));
         document.getElementById("button_register").addEventListener("click", this.register.bind(this));
+
+        window.firebase.auth().onAuthStateChanged(() => {
+            // Check login
+            if (window.firebase.auth().currentUser != null) this.postLogin();
+        });
     }
 }
 
