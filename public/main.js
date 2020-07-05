@@ -23,6 +23,9 @@ function initElements() {
             window.state.set(href.pathname.replace(/^\//, ""));
         });
     });
+
+    // Set up the back button
+    document.getElementById("back").addEventListener("click", () => window.history.back());
 }
 
 function init() {
