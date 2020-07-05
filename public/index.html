@@ -29,11 +29,6 @@
     <p id="back">&hookleftarrow;</p>
     
     <div id="container">
-        <div id="container_authMenu" class="authentication">
-            <input type="button" value="Login" id="button_loginMenu"/>
-            <input type="button" value="Register" id="button_registerMenu"/>
-        </div>
-
         <div id="container_login" class="authentication">
             <div>
                 <label for="input_login_email">Email:</label>
@@ -45,17 +40,7 @@
                 <input type="password" id="input_login_password"/>
                 <label for="input_login_password" class="errorLabel"></label>
             </div>
-            <a href="/resetPassword">Reset Password</a>
             <input type="button" value="Login" id="button_login"/>
-        </div>
-
-        <div id="container_2fa" class="authentication">
-            <div>
-                <label for="input_2fa_code">Code:</label>
-                <input type="number" id="input_2fa_code"/>
-                <label for="input_2fa_code" class="errorLabel"></label>
-            </div>
-            <input type="button" value="Verify" id="button_verify"/>
         </div>
 
         <div id="container_register" class="authentication">
@@ -85,15 +70,6 @@
                 <label for="input_register_password" class="errorLabel"></label>
             </div>
             <input type="button" value="Register" id="button_register"/>
-        </div>
-
-        <div id="container_resetPassword" class="authentication">
-            <div>
-                <label for="input_resetPassword_email">Email:</label>
-                <input type="email" id="input_resetPassword_email"/>
-                <label for="input_resetPassword_email" class="errorLabel"></label>
-            </div>
-            <input type="button" value="Reset Password" id="button_resetPassword"/>
         </div>
     </div>
     
