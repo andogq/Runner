@@ -8,6 +8,8 @@ input {
     font-size: 1.5rem;
 
     transition: border-color var(--transition), background var(--transition);
+
+    cursor: pointer;
 }
 input:focus {
     outline: none;
@@ -32,6 +34,7 @@ input ~ label.errorLabel {
 a {
     color: black;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 h1 {
