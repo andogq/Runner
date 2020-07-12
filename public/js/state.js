@@ -1,9 +1,5 @@
 class State {
     constructor(states) {
-        // Add the listener property to the states
-        Object.keys(states).forEach((state) => {
-            states[state].listeners = [];
-        });
         this.states = states;
 
         // Attach listener for popstate event
@@ -22,24 +18,13 @@ class State {
 
             // Check if the user needs to be authenticated
             if ((this.authenticated && config.authenticated >= 0) || (!this.authenticated && config.authenticated <= 0)) {
-                if (this.current && this.states[this.current].container) {
-                    // Hide the current container
-                    let oldContainer = `container_${this.states[this.current].container}`;
-                    document.getElementById(oldContainer).classList.remove("active");
-                }
-
-                if (config.container) {
-                    // Show the new container
-                    let newContainer = `container_${config.container}`;
-                    document.getElementById(newContainer).classList.add("active");
-                }
-
                 // Switch the state over
                 this._state = state;
                 if (config.trigger && alterHistory) window.history.pushState(undefined, "", config.trigger);
 
-                // Run all the listeners
-                config.listeners.forEach((callback) => callback());
+                // Emit the event
+                let e = new CustomEvent("runner_stateChange", {detail: state});
+                window.dispatchEvent(e);
             } else if (this.authenticated) this.go("profile");
             else this.go("login");
         } else console.error(`Undefined state ${state}`);
@@ -52,10 +37,6 @@ class State {
 
     back() {
         window.location.back();
-    }
-
-    listen(state, callback) {
-        if (this.states[state]) this.states[state].listeners.push(callback);
     }
 
     stateFromUrl() {

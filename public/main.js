@@ -15,17 +15,14 @@ const stateConfig = {
     login: {
         authenticated: -1,
         trigger: "/login",
-        container: "login"
     },
     register: {
         authenticated: -1,
         trigger: "/register",
-        container: "register"
     },
     profile: {
         authenticated: 1,
         trigger: "/profile",
-        container: "profile"
     }
 }
 
