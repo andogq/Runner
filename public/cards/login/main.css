@@ -1,9 +1,9 @@
-#container > .authentication > div {
+#card_login > div {
     display: grid;
     grid: 1fr auto / auto 1fr;
     align-items: center;
 }
 
-#container > .authentication > div > label.errorLabel {
+#card_login > div > label.errorLabel {
     grid-area: 2 / 2 / 3 / 3;
 }

@@ -51,7 +51,7 @@ function init() {
     window.state = new State(stateConfig);
 
     window.authentication = authentication;
-    window.authentication.init();
+    // window.authentication.init();
 
     window.cards = new CardManager("container");
 

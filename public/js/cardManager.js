@@ -42,6 +42,7 @@ class CardManager {
         return this.load(cardName).then(() => {
             // Card has already been loaded
             let el = document.createElement("div");
+            el.id = `card_${cardName}`;
     
             // Add the html
             el.innerHTML = this.loadedCards[cardName].html;
@@ -72,6 +73,14 @@ class CardManager {
                 console.error(e);
             });
         });
+    }
+
+    clear() {
+        // TODO: Implement clear function
+    }
+
+    remove(identifier) {
+        // TODO: Implement remove function to remove a card
     }
 }
 
