@@ -4,6 +4,7 @@ import {MapboxAPI} from "./js/mapboxApi.js";
 import {State} from "./js/state.js";
 import {authentication} from "./js/authentication.js";
 import {loader} from "./js/loader.js";
+import {CardManager} from "./js/cardManager.js";
 
 // Globals
 let map;
@@ -51,6 +52,8 @@ function init() {
 
     window.authentication = authentication;
     window.authentication.init();
+
+    window.cards = new CardManager("container");
 
     window.loader = loader;
     let loadingId = window.loader.start();
