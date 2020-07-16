@@ -76,7 +76,10 @@ class CardManager {
     }
 
     clear() {
-        // TODO: Implement clear function
+        this.cards.forEach((card) => {
+            card.el.remove();
+        });
+        this.cards = [];
     }
 
     remove(identifier) {
