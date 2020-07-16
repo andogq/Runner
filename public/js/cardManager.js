@@ -83,7 +83,19 @@ class CardManager {
     }
 
     remove(identifier) {
-        // TODO: Implement remove function to remove a card
+        if (typeof identifier == "number" && identifier < this.cards.length) {
+            // Identifier is an index
+            this.cards[identifier].el.remove();
+            this.cards.splice(identifier, 1);
+        } else if (typeof identifier == "string") {
+            // Identifier is a card type
+            this.cards = this.cards.filter((card) => {
+                if (card.type == identifier) {
+                    card.el.remove();
+                    return false;
+                } else return true;
+            });
+        }
     }
 }
 
