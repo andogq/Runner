@@ -36,42 +36,28 @@ let authentication = {
             }
         });
     },
-    login() {
-        this.clearErrors();
-
-        let emailEl = document.getElementById("input_login_email");
-        let passwordEl = document.getElementById("input_login_password");
-
-        let email = emailEl.value;
-        let password = passwordEl.value;
+    login(email, password) {
+        let loadId = window.loader.start();
 
         return firebase.auth().signInWithEmailAndPassword(email, password).then(this.postLogin).catch((e) => {
-            let emailError = emailEl.parentElement.children[2];
-            let passwordError = passwordEl.parentElement.children[2];
+            let emailError;
+            let passwordError;
 
             switch (e.code) {
-                case "auth/invalid-email": {
-                    emailError.innerHTML = e.message;
-                    emailEl.classList.add("error");
-                    break;
-                }
-                case "auth/user-disabled": {
-                    emailError.innerHTML = e.message;
-                    emailEl.classList.add("error");
-                    break;
-                }
+                case "auth/invalid-email":
+                case "auth/user-disabled":
                 case "auth/user-not-found": {
-                    emailError.innerHTML = e.message;
-                    emailEl.classList.add("error");
+                    emailError = e.message;
                     break;
                 }
                 case "auth/wrong-password": {
-                    passwordError.innerHTML = e.message;
-                    passwordEl.classList.add("error");
+                    passwordError = e.message;
                     break;
                 }
             }
-        });
+
+            throw({email: emailError, password: passwordError});
+        }).finally(() => window.loader.stop(loadId));
     },
     postLogin() {
         console.log(window.firebase.auth().currentUser);
