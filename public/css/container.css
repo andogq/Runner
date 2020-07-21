@@ -29,9 +29,3 @@
 
     transition: transform var(--transition), opacity var(--transition);
 }
-
-#container > *:not(.active) {
-    position: absolute;
-    transform: translateX(-100%);
-    opacity: 0;
-}
