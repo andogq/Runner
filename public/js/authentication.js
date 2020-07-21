@@ -1,45 +1,30 @@
 let authentication = {
-    register() {
-        this.clearErrors();
+    register(firstname, lastname, email, password) {
+        let loadId = window.loader.start();
 
-        let emailEl = document.getElementById("input_register_email");
-        let passwordEl = document.getElementById("input_register_password");
-
-        let email = emailEl.value;
-        let password = passwordEl.value;
-
-        return firebase.auth().createUserWithEmailAndPassword(email, password).then((credential) => {
-            console.log(credential);
-        }).catch((e) => {
-            let emailError = emailEl.parentElement.children[2];
-            let passwordError = passwordEl.parentElement.children[2];
+        return firebase.auth().createUserWithEmailAndPassword(email, password).catch((e) => {
+            let emailError;
+            let passwordError;
 
             switch (e.code) {
-                case "auth/email-already-in-use": {
-                    emailError.innerHTML = e.message;
-                    emailEl.classList.add("error");
-                    break;
-                }
+                case "auth/email-already-in-use":
                 case "auth/invalid-email": {
-                    emailError.innerHTML = e.message;
-                    emailEl.classList.add("error");
+                    emailError = e.message;
                     break;
                 }
                 case "auth/weak-password": {
-                    passwordError.innerHTML = e.message;
-                    passwordEl.classList.add("error");
+                    passwordError = e.message;
                     break;
                 }
-                default: {
-                    console.error("Uncaught error: ", e);
-                }
             }
-        });
+
+            throw({email: emailError, password: passwordError});
+        }).finally(() => window.loader.stop(loadId));
     },
     login(email, password) {
         let loadId = window.loader.start();
 
-        return firebase.auth().signInWithEmailAndPassword(email, password).then(this.postLogin).catch((e) => {
+        return firebase.auth().signInWithEmailAndPassword(email, password).catch((e) => {
             let emailError;
             let passwordError;
 
@@ -58,9 +43,6 @@ let authentication = {
 
             throw({email: emailError, password: passwordError});
         }).finally(() => window.loader.stop(loadId));
-    },
-    postLogin() {
-        console.log(window.firebase.auth().currentUser);
     },
     clearErrors() {
         [...document.getElementById("container").getElementsByClassName("authentication")].forEach((el) => {
