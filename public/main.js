@@ -54,6 +54,22 @@ function init() {
     // window.authentication.init();
 
     window.cards = new CardManager("container");
+    window.addEventListener("runner_stateChange", (e) => {
+        // Add listeners for certain cards
+        switch (e.detail) {
+            case "default": {
+                window.cards.clear();
+                break;
+            }
+            case "login": {
+                window.cards.set("login");
+                break;
+            }
+            case "register": {
+                window.cards.set("register");
+            }
+        }
+    });
 
     window.loader = loader;
     let loadingId = window.loader.start();

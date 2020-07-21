@@ -75,6 +75,11 @@ class CardManager {
         });
     }
 
+    set(cardName, initObject) {
+        this.clear();
+        this.add(cardName, initObject);
+    }
+
     clear() {
         this.cards.forEach((card) => {
             card.el.remove();
