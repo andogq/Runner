@@ -68,6 +68,8 @@ class CardManager {
                 });
 
                 this.container.appendChild(el);
+                // Slight delay so the element can be added
+                setTimeout(() => el.style.opacity = 1, 10);
             }).catch((e) => {
                 console.error(`Card ${cardName} either doesn't export anything`);
                 console.error(e);
@@ -80,9 +82,14 @@ class CardManager {
         this.add(cardName, initObject);
     }
 
+    removeEl(el) {
+        el.addEventListener("transitionend", () => el.remove(), {once: true});
+        el.style.opacity = "";
+    }
+
     clear() {
         this.cards.forEach((card) => {
-            card.el.remove();
+            this.removeEl(card.el);
         });
         this.cards = [];
     }
@@ -90,13 +97,14 @@ class CardManager {
     remove(identifier) {
         if (typeof identifier == "number" && identifier < this.cards.length) {
             // Identifier is an index
-            this.cards[identifier].el.remove();
+            this.removeEl(this.cards[identifier].el);
+            
             this.cards.splice(identifier, 1);
         } else if (typeof identifier == "string") {
             // Identifier is a card type
             this.cards = this.cards.filter((card) => {
                 if (card.type == identifier) {
-                    card.el.remove();
+                    this.removeEl(card.el);
                     return false;
                 } else return true;
             });
