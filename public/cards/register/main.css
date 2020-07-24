@@ -1,9 +1,1 @@
-#card_login > div {
-    display: grid;
-    grid: 1fr auto / auto 1fr;
-    align-items: center;
-}
-
-#card_login > div > label.errorLabel {
-    grid-area: 2 / 2 / 3 / 3;
-}
+@import url(/cards/common/css/authentication.css);
