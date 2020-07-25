@@ -1,10 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-@import url("./css/back.css");
 @import url("./css/container.css");
 @import url("./css/elements.css");
 @import url("./css/loader.css");
 @import url("./css/map.css");
-@import url("./css/topBar.css");
+@import url("./css/sidebar.css");
 
 * {
     padding: 0;
@@ -13,7 +12,6 @@
     font-family: 'Montserrat', sans-serif;
 
     user-select: none;
-    cursor: default;
 }
 
 :root {

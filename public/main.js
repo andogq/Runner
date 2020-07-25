@@ -44,7 +44,7 @@ function initElements() {
     });
 
     // Set up the back button
-    document.getElementById("back").addEventListener("click", () => window.history.back());
+    document.getElementById("button_back").addEventListener("click", () => window.history.back());
 }
 
 function init() {

@@ -9,6 +9,7 @@
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="/__/firebase/7.15.3/firebase-app.js"></script>
     <script src="/__/firebase/7.15.3/firebase-auth.js"></script>
@@ -17,16 +18,21 @@
 <body>
     <div id="map"></div>
 
-    <div id="topBar">
-        <h2>Runner</h2>
-        <div>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
+    <div id="sidebar">
+        <div id="button_back">
+            <span class="material-icons">arrow_back</span>
+            <h6>Back</h6>
         </div>
-
+        <hr/>
+        <div>
+            <span class="material-icons">login</span>
+            <h6>Login</h6>
+        </div>
+        <div>
+            <span class="material-icons">add</span>
+            <h6>Register</h6>
+        </div>
     </div>
-
-    <p id="back">&hookleftarrow;</p>
     
     <div id="container">
     </div>
