@@ -1,10 +1,11 @@
 // Imports
+import {authentication} from "./js/authentication.js";
+import {CardManager} from "./js/cardManager.js";
+import {loader} from "./js/loader.js";
 import {Map} from "./js/map.js";
 import {MapboxAPI} from "./js/mapboxApi.js";
+import {Sidebar} from "./js/sidebar.js";
 import {State} from "./js/state.js";
-import {authentication} from "./js/authentication.js";
-import {loader} from "./js/loader.js";
-import {CardManager} from "./js/cardManager.js";
 
 // Globals
 let map;
@@ -33,22 +34,24 @@ function getKey() {
     });
 }
 
-function initElements() {
-    // Make a elements change the state
-    [...document.getElementsByTagName("a")].forEach((el) => {
-        el.addEventListener("click", (e) => {
-            e.preventDefault();
-            let url = new URL(el.href);
-            window.state.link(url.pathname);
-        });
-    });
-
-    // Set up the back button
-    document.getElementById("button_back").addEventListener("click", () => window.history.back());
-}
-
 function init() {
     window.state = new State(stateConfig);
+    window.sidebar = new Sidebar(document.getElementById("sidebar"), {
+        "default": [
+            "back",
+            "hr",
+            {
+                link: "login",
+                icon: "login",
+                text: "Login"
+            },
+            {
+                link: "register",
+                icon: "add",
+                text: "Register"
+            }
+        ]
+    });
 
     window.authentication = authentication;
     // window.authentication.init();
@@ -73,8 +76,6 @@ function init() {
 
     window.loader = loader;
     let loadingId = window.loader.start();
-
-    initElements();
 
     getKey().then((key) => {
         window.api = new MapboxAPI(key);

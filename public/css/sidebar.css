@@ -38,4 +38,5 @@
 #sidebar > hr {
     border: 2px solid var(--color);
     margin: 1rem 0;
+    box-sizing: border-box;
 }
