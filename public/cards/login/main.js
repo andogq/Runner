@@ -14,33 +14,33 @@ function login() {
     let email = el.email.value;
     let password = el.password.value;
 
+    ["email", "password", "button"].forEach((type) => el[type].disabled = true);
+
     window.authentication.login(email, password).then(() => console.log("Success!")).catch((error) => {
         console.log(error);
 
-        if (error.email) {
-            el.email.classList.add("error");
-            el.error.email.innerText = error.email;
-        }
-
-        if (error.password) {
-            el.password.classList.add("error");
-            el.error.password.innerText = error.password;
-        }
-    });
+        Object.keys(error).forEach((type) => {
+            if (type != undefined) {
+                el[type].classList.add("error");
+                el.error[type].innerText = error[type];
+            }
+        });
+    }).finally(() => ["email", "password", "button"].forEach((type) => el[type].disabled = false));
 }
 
 function init(container) {
     el = {
         container,
-        email: container.querySelector("#input_login_email"),
-        password: container.querySelector("#input_login_password")
+        error: {},
+        button: container.querySelector("#button_login")
     };
-    el.error = {
-        email: el.email.parentElement.children[2],
-        password: el.password.parentElement.children[2]
-    };
+    
+    ["email", "password"].forEach((type) => {
+        el[type] = el.container.querySelector(`#input_login_${type}`);
+        el.error[type] = el[type].parentElement.children[2];
+    });
 
-    el.container.querySelector("#button_login").addEventListener("click", login);
+    el.button.addEventListener("click", login);
     el.container.addEventListener("keypress", (e) => {
         if (e.key == "Enter") login();
     });
