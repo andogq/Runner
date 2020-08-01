@@ -17,7 +17,7 @@ function register() {
 
     ["name", "email", "password", "button"].forEach((type) => el[type].disabled = true);
 
-    window.authentication.register(name, email, password).then(() => console.log("Success!")).catch((error) => {
+    window.interfaces.authentication.register(name, email, password).then(() => console.log("Success!")).catch((error) => {
         console.log(error);
 
         Object.keys(error).forEach((type) => {

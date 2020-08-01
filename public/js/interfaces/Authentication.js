@@ -10,7 +10,7 @@ class Authentication {
         });
     }
     register(name, email, password) {
-        let loadId = window.loader.start();
+        let loadId = window.modules.loader.start();
 
         return firebase.auth().createUserWithEmailAndPassword(email, password).catch((e) => {
             let emailError;
@@ -29,11 +29,11 @@ class Authentication {
             }
 
             throw({email: emailError, password: passwordError});
-        }).finally(() => window.loader.stop(loadId));
+        }).finally(() => window.modules.loader.stop(loadId));
     }
     
     login(email, password) {
-        let loadId = window.loader.start();
+        let loadId = window.modules.loader.start();
 
         return firebase.auth().signInWithEmailAndPassword(email, password).catch((e) => {
             let emailError;
@@ -53,7 +53,7 @@ class Authentication {
             }
 
             throw({email: emailError, password: passwordError});
-        }).finally(() => window.loader.stop(loadId));
+        }).finally(() => window.modules.loader.stop(loadId));
     }
 }
 

@@ -1,16 +1,18 @@
 class Map {
-    constructor(id, key, options = {}) {
+    constructor(id, options = {}) {
         this.id = id;
-        this.key = key;
         this.options = options;
 
         this.points = [];
-
-        mapboxgl.accessToken = this.key;
     }
 
     load() {
+        let loadId = window.modules.loader.start();
+
         return new Promise((resolve) => {
+            // Load the key from the Mapbox interface
+            mapboxgl.accessToken = window.interfaces.mapbox.key;
+
             this.map = new mapboxgl.Map({
                 container: this.id,
                 ...this.options
@@ -58,7 +60,7 @@ class Map {
                     "line-width": 10
                 }
             });
-        });
+        }).finally(() => window.modules.loader.stop(loadId));
     }
 
     generate(point) {

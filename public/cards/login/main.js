@@ -16,7 +16,7 @@ function login() {
 
     ["email", "password", "button"].forEach((type) => el[type].disabled = true);
 
-    window.authentication.login(email, password).then(() => console.log("Success!")).catch((error) => {
+    window.interfaces.authentication.login(email, password).then(() => console.log("Success!")).catch((error) => {
         console.log(error);
 
         Object.keys(error).forEach((type) => {

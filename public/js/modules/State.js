@@ -17,14 +17,14 @@ class State {
             let config = this.states[state];
 
             // Check if the user needs to be authenticated
-            if ((window.authentication.authenticated && config.authenticated >= 0) || (!window.authentication.authenticated && config.authenticated <= 0)) {
+            if ((window.interfaces.authentication.authenticated && config.authenticated >= 0) || (!window.interfaces.authentication.authenticated && config.authenticated <= 0)) {
                 // Switch the state over
                 this._state = state;
                 if (config.trigger && alterHistory) window.history.pushState(undefined, "", config.trigger);
 
                 // Emit the event
                 window.dispatchEvent(new CustomEvent("runner_stateChange", {detail: state}));
-            } else if (window.authentication.authenticated) this.go("profile");
+            } else if (window.interfaces.authentication.authenticated) this.go("profile");
             else this.go("login");
         } else console.error(`Undefined state ${state}`);
     }

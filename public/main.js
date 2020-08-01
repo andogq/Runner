@@ -1,95 +1,24 @@
 // Imports
-import {authentication} from "./js/authentication.js";
-import {CardManager} from "./js/cardManager.js";
-import {loader} from "./js/loader.js";
-import {Map} from "./js/map.js";
-import {MapboxAPI} from "./js/mapboxApi.js";
-import {Sidebar} from "./js/sidebar.js";
-import {State} from "./js/state.js";
+import {Authentication} from "/js/interfaces/Authentication.js";
+import {Mapbox} from "/js/interfaces/Mapbox.js";
 
-// Globals
-let map;
-const stateConfig = {
-    default: {
-        authenticated: 0,
-        trigger: "/"
-    },
-    login: {
-        authenticated: -1,
-        trigger: "/login",
-    },
-    register: {
-        authenticated: -1,
-        trigger: "/register",
-    },
-    profile: {
-        authenticated: 1,
-        trigger: "/profile",
-    }
-}
-
-function getKey() {
-    return fetch("/mapbox.key").then((res) => {
-        return res.text();
-    });
-}
+import {CardManager} from "/js/modules/CardManager.js";
+import {Loader} from "/js/modules/Loader.js";
+import {Map} from "/js/modules/Map.js";
+import {Sidebar} from "/js/modules/Sidebar.js";
+import {State} from "/js/modules/State.js";
 
 function init() {
-    window.authentication = authentication;
-    window.authentication.init();
+    // Load all the interfaces
+    window.interfaces = {
+        authentication: new Authentication()
+    };
 
-    window.state = new State(stateConfig);
-    window.sidebar = new Sidebar(document.getElementById("sidebar"), {
-        "default": [
-            "back",
-            "hr",
-            {
-                link: "login",
-                icon: "login",
-                text: "Login"
-            },
-            {
-                link: "register",
-                icon: "add",
-                text: "Register"
-            }
-        ],
-        "authenticated": [
-            "back",
-            "hr",
-            {
-                link: "logout",
-                icon: "cancel",
-                text: "Logout"
-            }
-        ]
-    });
-
-    window.cards = new CardManager("container");
-    window.addEventListener("runner_stateChange", (e) => {
-        // Add listeners for certain cards
-        switch (e.detail) {
-            case "default": {
-                window.cards.clear();
-                break;
-            }
-            case "login": {
-                window.cards.set("login");
-                break;
-            }
-            case "register": {
-                window.cards.set("register");
-            }
-        }
-    });
-
-    window.loader = loader;
-    let loadingId = window.loader.start();
-
-    getKey().then((key) => {
-        window.api = new MapboxAPI(key);
-        
-        map = new Map(key, {
+    // Load all the modules
+    window.modules = {
+        cardManager: new CardManager("container"),
+        loader: new Loader("loader"),
+        map: new Map("map", {
             style: "mapbox://styles/mapbox/streets-v11",
             center: {
                 lat: -38.1499,
@@ -97,13 +26,74 @@ function init() {
             },
             zoom: 15,
             minZoom: 12
-        });
-        map.load().then(() => {
-            console.log("Map loaded");
-            window.loader.stop(loadingId);
-        });
-    }).catch((err) => {
-        console.error("Something went wrong whilst initiating", err);
+        }),
+        sidebar: new Sidebar("sidebar", {
+            "default": [
+                "back",
+                "hr",
+                {
+                    link: "login",
+                    icon: "login",
+                    text: "Login"
+                },
+                {
+                    link: "register",
+                    icon: "add",
+                    text: "Register"
+                }
+            ],
+            "authenticated": [
+                "back",
+                "hr",
+                {
+                    link: "logout",
+                    icon: "cancel",
+                    text: "Logout"
+                }
+            ]
+        }),
+        state: new State({
+            default: {
+                authenticated: 0,
+                trigger: "/"
+            },
+            login: {
+                authenticated: -1,
+                trigger: "/login",
+            },
+            register: {
+                authenticated: -1,
+                trigger: "/register",
+            },
+            profile: {
+                authenticated: 1,
+                trigger: "/profile",
+            }
+        })
+    };
+
+    // Load the mapbox key and initialise the module and interface
+    fetch("/mapbox.key").then(async (res) => {
+        window.interfaces.mapbox = new Mapbox(await res.text());
+
+        window.modules.map.load();
+    });
+
+    window.addEventListener("runner_stateChange", (e) => {
+        // Add listeners for certain cards
+        switch (e.detail) {
+            case "default": {
+                window.modules.cardManager.clear();
+                break;
+            }
+            case "login": {
+                window.modules.cardManager.set("login");
+                break;
+            }
+            case "register": {
+                window.modules.cardManager.set("register");
+            }
+        }
     });
 }
 

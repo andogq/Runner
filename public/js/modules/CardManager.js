@@ -1,5 +1,5 @@
 class CardManager {
-    constructor(container = "container") {
+    constructor(container) {
         this.container = document.getElementById(container);
 
         // Cards that are loaded and ready to be added
