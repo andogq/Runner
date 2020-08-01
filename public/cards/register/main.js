@@ -18,18 +18,12 @@ function register() {
     window.authentication.register(name, email, password).then(() => console.log("Success!")).catch((error) => {
         console.log(error);
 
-        if (error.name) {
-            el.name.classList.add("error");
-            el.error.name.innerText = error.name;
-        }
-        if (error.email) {
-            el.email.classList.add("error");
-            el.error.email.innerText = error.email;
-        }
-        if (error.password) {
-            el.password.classList.add("error");
-            el.error.password.innerText = error.password;
-        }
+        Object.keys(error).forEach((type) => {
+            if (error[type] != undefined) {
+                el.error[type].innerText = error[type];
+                el.error[type].classList.add("error");
+            }
+        });
     });
 }
 
