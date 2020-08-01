@@ -36,7 +36,7 @@ class State {
     }
 
     back() {
-        window.location.back();
+        window.history.back();
     }
 
     stateFromUrl() {

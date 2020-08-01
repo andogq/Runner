@@ -33,7 +33,7 @@ class Sidebar {
                 if (button == "hr") el = document.createElement("hr");
                 else if (button == "back") {
                     el = this.createButton("back", "arrow_back", "Back");
-                    el.addEventListener("click", () => window.history.back());
+                    el.addEventListener("click", () => window.state.back());
                 } else {
                     el = this.createButton(button.link, button.icon, button.text)
                     el.addEventListener("click", () => window.state.go(button.link));
