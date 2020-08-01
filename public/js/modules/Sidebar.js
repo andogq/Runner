@@ -1,7 +1,7 @@
 class Sidebar {
-    constructor(container, states) {
+    constructor(id, states) {
         this.states = states;
-        this.container = container;
+        this.container = document.getElementById(id);
 
         this.switch(Object.keys(this.states)[0]);
     }

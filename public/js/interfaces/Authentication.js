@@ -1,4 +1,12 @@
-let authentication = {
+class Authentication {
+    constructor() {
+        this.authenticated = false;
+
+        window.firebase.auth().onAuthStateChanged(() => {
+            // Check login
+            this.authenticated = window.firebase.auth().currentUser != null;
+        });
+    }
     register(name, email, password) {
         let loadId = window.loader.start();
 
@@ -20,7 +28,8 @@ let authentication = {
 
             throw({email: emailError, password: passwordError});
         }).finally(() => window.loader.stop(loadId));
-    },
+    }
+    
     login(email, password) {
         let loadId = window.loader.start();
 
@@ -43,18 +52,7 @@ let authentication = {
 
             throw({email: emailError, password: passwordError});
         }).finally(() => window.loader.stop(loadId));
-    },
-    init() {
-        this.authenticated = false;
-        window.firebase.auth().onAuthStateChanged(() => {
-            // Check login
-            this.authenticated = window.firebase.auth().currentUser != null;
-
-            // Change the sidebar depending on what state it is
-            if (this.authenticated) window.sidebar.switch("authenticated");
-            else window.sidebar.switch("default");
-        });
     }
 }
 
-export {authentication};
+export {Authentication};

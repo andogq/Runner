@@ -1,7 +1,6 @@
-const elementId = "map";
-
 class Map {
-    constructor(key, options = {}) {
+    constructor(id, key, options = {}) {
+        this.id = id;
         this.key = key;
         this.options = options;
 
@@ -13,7 +12,7 @@ class Map {
     load() {
         return new Promise((resolve) => {
             this.map = new mapboxgl.Map({
-                container: elementId,
+                container: this.id,
                 ...this.options
             });
             

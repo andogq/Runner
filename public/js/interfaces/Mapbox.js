@@ -1,6 +1,6 @@
 const APIBase = "https://api.mapbox.com";
 
-class MapboxAPI {
+class Mapbox {
     constructor(key) {
         this.key = key;
     }
@@ -27,4 +27,4 @@ class MapboxAPI {
     }
 }
 
-export {MapboxAPI};
+export {Mapbox};

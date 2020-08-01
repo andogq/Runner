@@ -1,8 +1,10 @@
-const loaderId = "loader";
+class Loader {
+    constructor(id) {
+        this.el = document.getElementById(id);
+        this.ids = [];
+    }
 
-let loader = {
-    ids: [],
-    start: function() {
+    start() {
         function generateId() {
             return Math.floor(Math.random() * Math.pow(10, 10)).toString(16);
         }
@@ -10,20 +12,21 @@ let loader = {
 
         while (this.ids.indexOf(id) != -1) id = generateId();
         
-        if (this.ids.length == 0) document.getElementById(loaderId).classList.add("animate");
+        if (this.ids.length == 0) this.el.classList.add("animate");
         this.ids.push(id);
 
         return id;
-    },
-    stop: function(id) {
+    }
+
+    stop(id) {
         let index = this.ids.indexOf(id);
 
         if (index != -1) {
             this.ids.splice(index);
 
-            if (this.ids.length == 0) document.getElementById(loaderId).classList.remove("animate");
+            if (this.ids.length == 0) this.el.classList.remove("animate");
         }
     }
 }
 
-export {loader};
+export {Loader};
