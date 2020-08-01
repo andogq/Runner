@@ -5,6 +5,8 @@ class Authentication {
         window.firebase.auth().onAuthStateChanged(() => {
             // Check login
             this.authenticated = window.firebase.auth().currentUser != null;
+
+            window.dispatchEvent(new CustomEvent("runner_authenticationChange", {detail: this.authenticated}));
         });
     }
     register(name, email, password) {

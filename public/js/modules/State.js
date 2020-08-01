@@ -6,7 +6,7 @@ class State {
         window.addEventListener("popstate", this.stateFromUrl.bind(this));
 
         // Attach listener for auth change
-        firebase.auth().onAuthStateChanged(this.stateFromUrl.bind(this));
+        window.addEventListener("runner_authenticationChange", this.stateFromUrl.bind(this));
 
         // Load the state from the URL
         this.stateFromUrl();
@@ -23,8 +23,7 @@ class State {
                 if (config.trigger && alterHistory) window.history.pushState(undefined, "", config.trigger);
 
                 // Emit the event
-                let e = new CustomEvent("runner_stateChange", {detail: state});
-                window.dispatchEvent(e);
+                window.dispatchEvent(new CustomEvent("runner_stateChange", {detail: state}));
             } else if (window.authentication.authenticated) this.go("profile");
             else this.go("login");
         } else console.error(`Undefined state ${state}`);
