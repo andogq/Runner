@@ -15,6 +15,8 @@ function register() {
     let email = el.email.value;
     let password = el.password.value;
 
+    ["name", "email", "password", "button"].forEach((type) => el[type].disabled = true);
+
     window.authentication.register(name, email, password).then(() => console.log("Success!")).catch((error) => {
         console.log(error);
 
@@ -24,13 +26,14 @@ function register() {
                 el.error[type].classList.add("error");
             }
         });
-    });
+    }).finally(() => ["name", "email", "password", "button"].forEach((type) => el[type].disabled = false));
 }
 
 function init(container) {
     el = {
         container,
-        error: {}
+        error: {},
+        button: container.querySelector("#button_register")
     };
 
     ["name", "email", "password"].forEach((type) => {
@@ -38,7 +41,7 @@ function init(container) {
         el.error[type] = el[type].parentElement.children[2];
     });
 
-    el.container.querySelector("#button_register").addEventListener("click", register);
+    el.button.addEventListener("click", register);
     el.container.addEventListener("keypress", (e) => {
         if (e.key == "Enter") register();
     });
