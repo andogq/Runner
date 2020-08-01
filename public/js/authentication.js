@@ -1,5 +1,5 @@
 let authentication = {
-    register(firstname, lastname, email, password) {
+    register(name, email, password) {
         let loadId = window.loader.start();
 
         return firebase.auth().createUserWithEmailAndPassword(email, password).catch((e) => {

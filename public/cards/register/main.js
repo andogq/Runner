@@ -11,21 +11,16 @@ function register() {
         e.parentElement.children[2].innerText = ""
     });
 
-    let firstname = el.firstname.value;
-    let lastname = el.lastname.value;
+    let name = el.name.value;
     let email = el.email.value;
     let password = el.password.value;
 
-    window.authentication.register(firstname, lastname, email, password).then(() => console.log("Success!")).catch((error) => {
+    window.authentication.register(name, email, password).then(() => console.log("Success!")).catch((error) => {
         console.log(error);
 
-        if (error.firstname) {
-            el.firstname.classList.add("error");
-            el.error.firstname.innerText = error.firstname;
-        }
-        if (error.lastname) {
-            el.lastname.classList.add("error");
-            el.error.lastname.innerText = error.lastname;
+        if (error.name) {
+            el.name.classList.add("error");
+            el.error.name.innerText = error.name;
         }
         if (error.email) {
             el.email.classList.add("error");
@@ -44,7 +39,7 @@ function init(container) {
         error: {}
     };
 
-    ["firstname", "lastname", "email", "password"].forEach((type) => {
+    ["name", "email", "password"].forEach((type) => {
         el[type] = el.container.querySelector(`#input_register_${type}`);
         el.error[type] = el[type].parentElement.children[2];
     });
