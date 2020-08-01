@@ -17,7 +17,7 @@ class State {
             let config = this.states[state];
 
             // Check if the user needs to be authenticated
-            if ((this.authenticated && config.authenticated >= 0) || (!this.authenticated && config.authenticated <= 0)) {
+            if ((window.authentication.authenticated && config.authenticated >= 0) || (!window.authentication.authenticated && config.authenticated <= 0)) {
                 // Switch the state over
                 this._state = state;
                 if (config.trigger && alterHistory) window.history.pushState(undefined, "", config.trigger);
@@ -25,7 +25,7 @@ class State {
                 // Emit the event
                 let e = new CustomEvent("runner_stateChange", {detail: state});
                 window.dispatchEvent(e);
-            } else if (this.authenticated) this.go("profile");
+            } else if (window.authentication.authenticated) this.go("profile");
             else this.go("login");
         } else console.error(`Undefined state ${state}`);
     }
@@ -57,10 +57,6 @@ class State {
 
     get current() {
         return this._state;
-    }
-
-    get authenticated() {
-        return window.firebase.auth().currentUser != null;
     }
 }
 

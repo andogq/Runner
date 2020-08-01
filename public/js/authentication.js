@@ -45,9 +45,14 @@ let authentication = {
         }).finally(() => window.loader.stop(loadId));
     },
     init() {
+        this.authenticated = false;
         window.firebase.auth().onAuthStateChanged(() => {
             // Check login
-            console.log("Login change");
+            this.authenticated = window.firebase.auth().currentUser != null;
+
+            // Change the sidebar depending on what state it is
+            if (this.authenticated) window.sidebar.switch("authenticated");
+            else window.sidebar.switch("default");
         });
     }
 }

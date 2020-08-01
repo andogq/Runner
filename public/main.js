@@ -35,6 +35,9 @@ function getKey() {
 }
 
 function init() {
+    window.authentication = authentication;
+    window.authentication.init();
+
     window.state = new State(stateConfig);
     window.sidebar = new Sidebar(document.getElementById("sidebar"), {
         "default": [
@@ -50,11 +53,17 @@ function init() {
                 icon: "add",
                 text: "Register"
             }
+        ],
+        "authenticated": [
+            "back",
+            "hr",
+            {
+                link: "logout",
+                icon: "cancel",
+                text: "Logout"
+            }
         ]
     });
-
-    window.authentication = authentication;
-    // window.authentication.init();
 
     window.cards = new CardManager("container");
     window.addEventListener("runner_stateChange", (e) => {
